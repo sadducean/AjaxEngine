@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="sol.haruzion.ajaxengine.mapper.CommonMapper">
+	<select id="existsdb" resultType="boolean">
+		SELECT COUNT(*) FROM INFORMATION_SCHEMA.SCHEMATA WHERE SCHEMA_NAME = #{param.db}
+	</select>
+	<select id="existstbl" resultType="boolean">
+		SELECT count(*) 
+		FROM information_schema.tables
+		WHERE table_schema = #{param.db}
+		    AND table_name = #{param.tbl}
+	</select>
+	<select id="columns" parameterType="map" resultType="map">
+	SELECT COLUMN_NAME,COLUMN_TYPE
+	FROM INFORMATION_SCHEMA.COLUMNS 
+	WHERE TABLE_SCHEMA=#{param.db} 
+	    AND TABLE_NAME=#{param.tbl};
+	</select>
+	<update id="createdb">
+		CREATE DATABASE ${param.db} COLLATE 'utf8mb4_general_ci'
+	</update>
+	<update id="update">
+		${param.sql}
+	</update>
+	<insert id="insert" parameterType="map">
+		${param.sql}
+		<selectKey keyProperty="param.seq" resultType="long">
+	        SELECT LAST_INSERT_ID()
+	    </selectKey>
+	</insert>
+	<delete id="delete">
+		${param.sql}
+	</delete>
+	<select id="select" parameterType="map" resultType="map">
+		${param.sql}
+	</select>
+	<select id="count" parameterType="map" resultType="long">
+		${param.sql}
+	</select>
+</mapper>
