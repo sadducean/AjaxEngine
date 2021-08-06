@@ -24,5 +24,5 @@
 
 - 기본적으로 보안상 localhost 에서만 동작하도록 설정되어 있기 때문에 다른 아이피나 도메인에서 사용할 경우 setting.xml 상의 hostlist 에 추가 바랍니다.
 
-
+기타 문의사항은 sadducean@nate.com 으로 메일주세요....
 
